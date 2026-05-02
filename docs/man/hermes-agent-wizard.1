@@ -1,0 +1,36 @@
+.TH HERMES-AGENT-WIZARD 1 "2026-05-02" "0.1.1" "Hermes Agent Wizard Manual"
+.SH NAME
+hermes-agent-wizard \- Interactive TUI launcher for the Hermes Agent
+.SH SYNOPSIS
+.B hermes-agent-wizard
+[\fIOPTIONS\fR]
+.SH DESCRIPTION
+\fBhermes-agent-wizard\fR is a Terminal User Interface (TUI) designed to manage and interact with a local Hermes Agent installation. It provides a dashboard for configuration status, a launcher for common actions, and a log viewer.
+.SH OPTIONS
+.TP
+.BR \-h ", " \-\-help
+Display verbose help information and exit.
+.SH TUI CONTROLS
+.TP
+\fBTab\fR
+Cycle through Dashboard, Launcher, and Logs tabs.
+.TP
+\fBUp/Down Arrows\fR
+Navigate items in the Launcher menu.
+.TP
+\fBEnter\fR
+Execute the selected action in the Launcher.
+.TP
+\fBq\fR
+Quit the application.
+.SH FILES
+.TP
+\fI~/.hermes/config.yaml\fR
+The primary configuration file for the Hermes Agent.
+.TP
+\fI~/.hermes/logs/agent.log\fR
+The log file monitored by the wizard.
+.SH SEE ALSO
+\fBtirith\fR(1)
+.SH AUTHOR
+danindiana
