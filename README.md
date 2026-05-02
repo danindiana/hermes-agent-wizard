@@ -1,5 +1,9 @@
 # Hermes Agent Wizard
 
+<p align="center">
+  <img src="assets/logo.png" width="256" alt="Hermes Agent Wizard Logo">
+</p>
+
 An interactive TUI launcher for the Hermes Agent, built with Rust and Ratatui.
 
 ## Features
