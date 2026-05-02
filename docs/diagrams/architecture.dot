@@ -1,0 +1,9 @@
+digraph G {
+    rankdir=LR;
+    node [shape=rect, style=filled, color=lightblue];
+    User -> Wizard [label="Invokes"];
+    Wizard -> Config [label="Reads ~/.hermes/config.yaml"];
+    Wizard -> Logs [label="Reads agent.log"];
+    Wizard -> Subprocess [label="Spawns (cli.py, tirith, nano)"];
+    Subprocess -> Terminal [label="IO"];
+}

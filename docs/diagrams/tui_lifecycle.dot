@@ -1,0 +1,15 @@
+digraph G {
+    node [shape=ellipse, style=filled, color=lightgreen];
+    Start -> Init_Terminal;
+    Init_Terminal -> Main_Loop;
+    subgraph cluster_loop {
+        label="Main Loop";
+        Main_Loop -> Draw_UI;
+        Draw_UI -> Poll_Events;
+        Poll_Events -> Handle_Input;
+        Handle_Input -> Update_State;
+        Update_State -> Main_Loop;
+    }
+    Handle_Input -> Cleanup [label="Key: q"];
+    Cleanup -> End;
+}

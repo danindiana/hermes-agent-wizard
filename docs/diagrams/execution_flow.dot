@@ -1,0 +1,14 @@
+digraph G {
+    node [shape=diamond, style=filled, color=lightpink];
+    Trigger [shape=rect, label="User hits Enter"];
+    Suspend [label="Disable Raw Mode\nLeave Alt Screen"];
+    Run [shape=rect, label="Command::status()"];
+    Error [label="Exit Code != 0?"];
+    Wait [label="Wait for Keypress"];
+    Resume [label="Enable Raw Mode\nEnter Alt Screen"];
+    
+    Trigger -> Suspend -> Run -> Error;
+    Error -> Wait [label="Yes"];
+    Error -> Resume [label="No"];
+    Wait -> Resume;
+}

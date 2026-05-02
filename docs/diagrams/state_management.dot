@@ -1,0 +1,6 @@
+digraph G {
+    node [shape=record, style=filled, color=lightyellow];
+    App [label="{App | current_tab: Tab \l config: Option\<HermesConfig\> \l launcher_state: ListState \l log_content: Vec\<String\> \l hermes_path: PathBuf \l}"];
+    Tab [label="{Tab | Dashboard \l Launcher \l Logs \l}"];
+    App -> Tab;
+}

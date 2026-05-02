@@ -1,0 +1,10 @@
+digraph G {
+    node [shape=note, style=filled, color=lightgrey];
+    Config [label="config.yaml"];
+    LogFile [label="agent.log"];
+    Dashboard [shape=rect, color=lightblue, label="Dashboard View"];
+    Logs [shape=rect, color=lightblue, label="Logs View"];
+    
+    Config -> Dashboard [label="Deserialized by serde_yaml"];
+    LogFile -> Logs [label="Buffered line reading"];
+}

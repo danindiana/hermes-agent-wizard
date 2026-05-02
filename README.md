@@ -26,35 +26,28 @@ cd hermes-agent-wizard
 cargo run
 ```
 
-## Architecture & Flow
+## Architecture & Documentation
 
-### System Diagram
-```dot
-digraph G {
-    node [shape=box, style=filled, color=lightblue];
-    User -> "Hermes Agent Wizard" [label="CLI Invocation"];
-    "Hermes Agent Wizard" -> Dashboard [label="Tab 1"];
-    "Hermes Agent Wizard" -> Launcher [label="Tab 2"];
-    "Hermes Agent Wizard" -> Logs [label="Tab 3"];
-    
-    Dashboard -> "~/.hermes/config.yaml" [label="Parses"];
-    Launcher -> "Hermes CLI (cli.py)" [label="Executes"];
-    Launcher -> "Tirith (doctor)" [label="Executes"];
-    Launcher -> Nano [label="Edits Config"];
-    Logs -> "agent.log" [label="Reads"];
-}
-```
+To provide a clear understanding of how the Hermes Agent Wizard operates, we've broken down its internals into five key perspectives.
 
-### Wizard Logic Flow
-```dot
-digraph Flow {
-    rankdir=LR;
-    Start -> "TUI Init" -> "Main Loop";
-    "Main Loop" -> "Event Handling" [label="Key Press"];
-    "Event Handling" -> "State Update";
-    "Event Handling" -> "External Process" [label="Enter (Launcher)"];
-    "External Process" -> "TUI Suspend" -> "Run Command" -> "TUI Resume";
-    "State Update" -> "Render Frame" -> "Main Loop";
-}
-```
+### 1. System Architecture
+High-level interaction between the user, the wizard, and the underlying system components.
+![System Architecture](docs/diagrams/architecture.svg)
+
+### 2. State Management
+The internal data structure (`App` struct) that drives the TUI.
+![State Management](docs/diagrams/state_management.svg)
+
+### 3. TUI Lifecycle
+The execution loop from terminal initialization to event handling and graceful shutdown.
+![TUI Lifecycle](docs/diagrams/tui_lifecycle.svg)
+
+### 4. Command Execution Flow
+How the wizard safely suspends the TUI to hand over terminal control to external processes like `tirith` or `cli.py`.
+![Command Execution Flow](docs/diagrams/execution_flow.svg)
+
+### 5. Data Provenance
+Mapping the flow of system data (config and logs) into the wizard's views.
+![Data Provenance](docs/diagrams/data_provenance.svg)
+
 
