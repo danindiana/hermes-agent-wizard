@@ -119,6 +119,12 @@ impl App {
 }
 
 fn main() -> Result<()> {
+    let args: Vec<String> = std::env::args().collect();
+    if args.iter().any(|arg| arg == "--help" || arg == "-h") {
+        print_help();
+        return Ok(());
+    }
+
     color_eyre::install()?;
     enable_raw_mode()?;
     let mut stdout = io::stdout();
@@ -142,6 +148,52 @@ fn main() -> Result<()> {
     }
 
     Ok(())
+}
+
+fn print_help() {
+    println!(r#"
+Hermes Agent Wizard - Verbose Help ⚕️
+
+The Hermes Agent Wizard is a Terminal User Interface (TUI) designed to simplify 
+management and interaction with your local Hermes Agent.
+
+USAGE:
+    hermes-agent-wizard [FLAGS]
+
+FLAGS:
+    -h, --help      Prints this verbose help information and exits.
+
+TUI NAVIGATION & SHORTCUTS:
+    [Tab]           Cycle through views: Dashboard -> Launcher -> Logs.
+    [↑/↓ Arrows]    Navigate through items in the Launcher menu.
+    [Enter]         Execute the highlighted action in the Launcher.
+    [q]             Quit the wizard and restore terminal state.
+
+DETAILED VIEW EXPLANATIONS:
+
+  1. DASHBOARD VIEW
+     - Status Overview: Confirms the presence of the ~/.hermes directory.
+     - Model Info: Displays the default LLM (e.g., qwen3.5:4b) and the provider.
+     - Toolsets: Lists all active toolsets currently enabled in your agent.
+
+  2. LAUNCHER VIEW (Action Center)
+     - Launch Hermes CLI: Initiates the primary Python-based Interactive CLI (cli.py).
+       This is the main interface for chatting with the agent.
+     - Tirith Doctor: Runs a diagnostic check on the Tirith security layer to
+       verify installation health and shell hook status.
+     - Edit Config: Spawns a 'nano' session directly to ~/.hermes/config.yaml.
+     - View Live Logs: Executes 'tail -f' on the agent.log for real-time monitoring.
+
+  3. LOGS VIEW
+     - Displays a static snapshot of the last 100 lines of your agent.log.
+     - Useful for quick verification without leaving the wizard.
+
+SYSTEM REQUIREMENTS:
+    - Hermes Agent: Must be initialized at ~/.hermes.
+    - Python Venv: Expects a virtual environment in the agent source directory.
+    - Terminal: Supports most modern terminal emulators (Xterm, Alacritty, iTerm2).
+
+"#);
 }
 
 fn run_app<B: Backend + io::Write>(terminal: &mut Terminal<B>, app: &mut App) -> Result<()> {
